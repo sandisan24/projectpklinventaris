@@ -1,6 +1,7 @@
 <?php
 
 use App\http\Controllers\ApiUserController;
+use App\http\Controllers\ApiStokController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +21,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::resource('User', ApiUserController::class);
+Route::resource('Stok', ApiStokController::class);
