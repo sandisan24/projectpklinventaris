@@ -29,10 +29,6 @@
                                     <th>Nama Barang</th>
                                     <th>Kategori Barang</th>
                                     <th>Merek</th>
-                                    <th>Stok Asal</th>
-                                    <th>Jumblah Barang Masuk</th>
-                                    <th>Jumblah Barang Keluar</th>
-                                    <th>Peminjaman</th>
                                     <th>Jumlah Stok</th>
                                 </tr>
                                 @php $no=1; @endphp
@@ -42,10 +38,6 @@
                                         <td>{{ $data->nama_barang }}</td>
                                         <td>{{ $data->kategori_barang }}</td>
                                         <td>{{ $data->merek }}</td>
-                                        <td>{{ $data->stokasal }}</td>
-                                        <td>{{ $data->jumblahbarangmasuk }}</td>
-                                        <td>{{ $data->jumblahbarangkeluar }}</td>
-                                        <td>{{ $data->peminjaman }}</td>
                                         <td>{{ $data->jumblahstok }}</td>
                                         <td>
                                             <form action="{{ route('stok.destroy', $data->id) }}" method="post">

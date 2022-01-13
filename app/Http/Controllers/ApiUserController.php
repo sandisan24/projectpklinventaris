@@ -43,6 +43,16 @@ class ApiUserController extends Controller
     public function store(Request $request)
     {
         //
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return response()->json([
+            'success' => true,
+            'message' => 'data user berhasil dibuat',
+            'data' => $user,
+        ],201);
     }
 
     /**
@@ -54,6 +64,20 @@ class ApiUserController extends Controller
     public function show($id)
     {
         //
+        $user = User::find($id);
+        if ($user) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Show Data user',
+                'data' => $user,
+            ], 200);
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data user tidak ditemukan',
+                'data' => [],
+            ], 404);
+        }
     }
 
     /**
@@ -77,6 +101,25 @@ class ApiUserController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::find($id);
+        if ($user) {
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = bcrypt($request->password);
+            $user->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'data user berhasil dibuat',
+                'data' => $user,
+            ],201);
+
+        } else{
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Data user tidak ditemukan',
+                    'data' => [],
+                ], 404);
+        }
     }
 
     /**
@@ -88,5 +131,20 @@ class ApiUserController extends Controller
     public function destroy($id)
     {
         //
+        $user = User::find($id);
+        if ($user) {
+            $user->delete();
+            return response()->json([
+                'success' => true,
+                'message' => 'Data user berhasil dihapus',
+                'data' => $user,
+            ], 200);
+        }else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data user tidak ditemukan',
+                'data' => [],
+            ], 404);
+        }
     }
 }

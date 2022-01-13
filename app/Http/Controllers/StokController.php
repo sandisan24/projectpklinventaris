@@ -43,10 +43,7 @@ class StokController extends Controller
             'nama_barang' => 'required',
             'kategori_barang' => 'required',
             'merek' => 'required',
-            'stokasal' => 'required',
-            'jumblahbarangmasuk' => 'required',
-            'jumblahbarangkeluar' => 'required',
-            'peminjaman' => 'required',
+        
             'jumblahstok' => 'required',
         ]);
 
@@ -54,10 +51,6 @@ class StokController extends Controller
         $stok->nama_barang = $request->nama_barang;
         $stok->kategori_barang = $request->kategori_barang;
         $stok->merek = $request->merek;
-        $stok->stokasal = $request->stokasal;
-        $stok->jumblahbarangmasuk = $request->jumblahbarangmasuk;
-        $stok->jumblahbarangkeluar = $request->jumblahbarangkeluar;
-        $stok->peminjaman = $request->peminjaman;
         $stok->jumblahstok = $request->jumblahstok;
         $stok->save();
         return redirect()->route('stok.index');
@@ -105,10 +98,6 @@ class StokController extends Controller
             'nama_barang' => 'required',
             'kategori_barang' => 'required',
             'merek' => 'required',
-            'stokasal' => 'required',
-            'jumblahbarangmasuk' => 'required',
-            'jumblahbarangkeluar' => 'required',
-            'peminjaman' => 'required',
             'jumblahstok' => 'required',
         ]);
 
@@ -116,10 +105,6 @@ class StokController extends Controller
         $stok->nama_barang = $request->nama_barang;
         $stok->kategori_barang = $request->kategori_barang;
         $stok->merek = $request->merek;
-        $stok->stokasal = $request->stokasal;
-        $stok->jumblahbarangmasuk = $request->jumblahbarangmasuk;
-        $stok->jumblahbarangkeluar = $request->jumblahbarangkeluar;
-        $stok->peminjaman = $request->peminjaman;
         $stok->jumblahstok = $request->jumblahstok;
         $stok->save();
         return redirect()->route('stok.index');

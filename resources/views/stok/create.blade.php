@@ -49,46 +49,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Stok Asal Barang</label>
-                                <input type="text" name="stokasal"
-                                    class="form-control @error('stokasal') is-invalid @enderror">
-                                @error('stokasal')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Jumblah Barang Masuk</label>
-                                <input type="text" name="jumblahbarangmasuk"
-                                    class="form-control @error('jumblahbarangmasuk') is-invalid @enderror">
-                                @error('jumblahbarangmasuk')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Jumblah Barang Keluar</label>
-                                <input type="text" name="jumblahbarangkeluar"
-                                    class="form-control @error('jumblahbarangkeluar') is-invalid @enderror">
-                                @error('jumblahbarangkeluar')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Peminjaman</label>
-                                <input type="text" name="peminjaman"
-                                    class="form-control @error('peminjaman') is-invalid @enderror">
-                                @error('peminjaman')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
                                 <label for="">Jumblah Stok</label>
                                 <input type="text" name="jumblahstok"
                                     class="form-control @error('jumblahstok') is-invalid @enderror">

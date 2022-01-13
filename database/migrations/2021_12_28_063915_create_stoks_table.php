@@ -18,10 +18,6 @@ class CreateStoksTable extends Migration
             $table->string('nama_barang');
             $table->string('kategori_barang');
             $table->string('merek');
-            $table->integer('stokasal');
-            $table->integer('jumblahbarangmasuk');
-            $table->integer('jumblahbarangkeluar');
-            $table->string('peminjaman');
             $table->integer('jumblahstok');
             $table->timestamps();
         });
