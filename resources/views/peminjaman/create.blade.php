@@ -1,37 +1,38 @@
 @extends('adminlte::page')
-@section('header')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1 class="m-0">Tambah Data Peminjaman</h1>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+
+Dashboard
+
+@stop
 
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header">Tambah Peminjaman</div>
                     <div class="card-body">
                         <form action="{{ route('peminjaman.store') }}" method="post">
                             @csrf
                             <div class="form-group">
-                                <label for="">Peminjaman</label>
-                                <input type="text" name="peminjaman"
-                                    class="form-control @error('peminjaman') is-invalid @enderror">
-                                @error('peminjaman')
+                                <label for="">Peminjam</label>
+                                <input type="text" name="peminjam" class="form-control @error('peminjam') is-invalid @enderror">
+                                @error('peminjam')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Jenis Kelamin</label>
-                                <input type="text" name="jk" class="form-control @error('jk') is-invalid @enderror">
+                            <label for="jk">Jenis Kelamin :</label> <br>
+                            <div class="form-check form-check-inline">
+                            <label for="jk">
+                            <input type="radio" name="jk" value="L" id="jk" selected>Laki-Laki
+                            <input type="radio" name="jk" value="P" id="jk">Perempuan
+                            </label>
                                 @error('jk')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -47,36 +48,44 @@
                                     </span>
                                 @enderror
                             </div>
+                           
                             <div class="form-group">
-                                <label for="">Jumlah</label>
-                                <input type="text" name="jumlah" class="form-control @error('jumlah') is-invalid @enderror">
+                                <label for="">Jumblah Barang</label>
+                                <input type="text" name="jumlah"
+                                    class="form-control @error('jumlah') is-invalid @enderror">
                                 @error('jumlah')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
+                            
                             <div class="form-group">
-                                <label for="">Merek</label>
-                                <input type="text" name="merek" class="form-control @error('merek') is-invalid @enderror">
-                                @error('merek')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="">Id Barang</label>
-                                <input type="text" name="id_barang"
-                                    class="form-control @error('id_barang') is-invalid @enderror">
+                                <label for="">Nama Barang</label>
+                                <select name="id_barang" class="form-control @error('id_barang') is-invalid @enderror">
+                                    <option value="">Pilih Barang</option>
+                                    @foreach ($stok as $data)
+                                        <option value="{{ $data->id }}"> {{ $data->nama_barang }} </option>
+                                    @endforeach
+                                </select>
                                 @error('id_barang')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div> 
+                            <div class="form-group">
+                                <label for="">Merek</label>
+                                <input type="text" name="Merek"
+                                    class="form-control @error('Merek') is-invalid @enderror">
+                                @error('Merek')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Tanggal Pinjam</label>
+                                <label for="">Tanggal Peminjaman</label>
                                 <input type="date" name="tgl_pinjam"
                                     class="form-control @error('tgl_pinjam') is-invalid @enderror">
                                 @error('tgl_pinjam')
@@ -87,7 +96,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Tanggal Kembali</label>
-                                <input type="date" name="tgl_kembali"
+                                <input type="Date" name="tgl_kembali"
                                     class="form-control @error('tgl_kembali') is-invalid @enderror">
                                 @error('tgl_kembali')
                                     <span class="invalid-feedback" role="alert">
@@ -95,11 +104,8 @@
                                     </span>
                                 @enderror
                             </div>
-
-
-                            <div class="form-group">
-                                <button type="reset" class="btn btn-default">Reset</button>
-                                <button type="submit" class="btn btn-default">Simpan</button>
+                                <button type="reset" class="btn btn-outline-warning">Reset</button>
+                                <button type="submit" class="btn btn-outline-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -107,4 +113,13 @@
             </div>
         </div>
     </div>
-@endsection
+
+@stop
+
+@section('css')
+
+@stop
+
+@section('js')
+
+@stop

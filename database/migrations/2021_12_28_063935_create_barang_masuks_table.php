@@ -17,9 +17,8 @@ class CreateBarangMasuksTable extends Migration
             $table->id();
             $table->BigInteger('id_barang')->unsigned();
             $table->foreign('id_barang')->references('id')->on('stoks');
-            $table->string('nama_barang');
             $table->string('kategori_barang');
-            $table->string('merek');
+            $table->string('Merek');
             $table->integer('jumlah_barang');
             $table->date('tgl_masuk');
             $table->string('kondisi');

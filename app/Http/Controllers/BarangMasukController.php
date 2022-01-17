@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\barangmasuk;
+use App\Models\Barangmasuk;
+use App\Models\Stok;
 use Illuminate\Http\Request;
 
-class BarangMasukController extends Controller
+class BarangmasukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +16,7 @@ class BarangMasukController extends Controller
     public function index()
     {
         //
-        $barangmasuk = barangmasuk::all();
+        $barangmasuk = Barangmasuk::all();
         return view('barangmasuk.index', compact('barangmasuk'));
     }
 
@@ -27,7 +28,8 @@ class BarangMasukController extends Controller
     public function create()
     {
         //
-        return view('barangmasuk.create');
+        $stok = Stok::all();
+        return view('barangmasuk.create', compact('stok'));
     }
 
     /**
@@ -38,12 +40,11 @@ class BarangMasukController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
+        
+         $request->validate([
             'id_barang' => 'required',
-            'nama_barang' => 'required',
             'kategori_barang' => 'required',
-            'merek' => 'required',
+            'Merek' => 'required',
             'jumlah_barang' => 'required',
             'tgl_masuk' => 'required',
             'kondisi' => 'required',
@@ -52,14 +53,16 @@ class BarangMasukController extends Controller
 
         $barangmasuk = new Barangmasuk;
         $barangmasuk->id_barang = $request->id_barang;
-        $barangmasuk->nama_barang = $request->nama_barang;
-        $barangmasuk->kategori_barang = $request->kategori_barang;
-        $barangmasuk->merek = $request->merek;
         $barangmasuk->jumlah_barang = $request->jumlah_barang;
         $barangmasuk->tgl_masuk = $request->tgl_masuk;
+        $barangmasuk->kategori_barang = $request->kategori_barang;
+        $barangmasuk->Merek = $request->Merek;
         $barangmasuk->kondisi = $request->kondisi;
         $barangmasuk->keterangan = $request->keterangan;
         $barangmasuk->save();
+        $stok = Stok::findOrFail($request->id_barang);
+        $stok->jumblahstok += $request->jumlah_barang;
+        $stok->save();
         return redirect()->route('barangmasuk.index');
     }
 
@@ -72,7 +75,7 @@ class BarangMasukController extends Controller
     public function show($id)
     {
         //
-        $barangmasuk = barangmasuk::findOrFail($id);
+        $barangmasuk = Barangmasuk::findOrFail($id);
         return view('barangmasuk.show', compact('barangmasuk'));
     }
 
@@ -85,8 +88,9 @@ class BarangMasukController extends Controller
     public function edit($id)
     {
         //
-        $barangmasuk = barangmasuk::findOrFail($id);
-        return view('barangmasuk.edit', compact('barangmasuk'));
+        $barangmasuk = Barangmasuk::findOrFail($id);
+        $stok = Stok::all();
+        return view('barangmasuk.edit', compact('barangmasuk', 'stok'));
     }
 
     /**
@@ -99,18 +103,16 @@ class BarangMasukController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $request->validate([
+         $request->validate([
             'id_barang' => 'required',
-            'nama_barang' => 'required',
             'kategori_barang' => 'required',
-            'merek' => 'required',
+            'Merek' => 'required',
             'jumlah_barang' => 'required',
             'tgl_masuk' => 'required',
             'kondisi' => 'required',
-            'keterangan' => 'required',
         ]);
 
-        $barangmasuk = barangmasuk::findOrFail($id);
+        $barangmasuk = Barangmasuk::findOrFail($id);
         $barangmasuk->id_barang = $request->id_barang;
         $barangmasuk->jumlah_barang = $request->jumlah_barang;
         $barangmasuk->tgl_masuk = $request->tgl_masuk;
@@ -118,6 +120,10 @@ class BarangMasukController extends Controller
         $barangmasuk->kondisi = $request->kondisi;
         $barangmasuk->keterangan = $request->keterangan;
         $barangmasuk->save();
+        $stok = Stok::findOrFail($request->id_barang);
+        $stok->jumblahstok += $request->jumlah_barang;
+        $stok->save();
+
         return redirect()->route('barangmasuk.index');
     }
 
@@ -130,7 +136,7 @@ class BarangMasukController extends Controller
     public function destroy($id)
     {
         //
-        $barangmasuk = barangmasuk::findOrFail($id);
+        $barangmasuk = Barangmasuk::findOrFail($id);
         $barangmasuk->delete();
         return redirect()->route('barangmasuk.index');
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Peminjaman;
+use App\Models\Stok;
 use Illuminate\Http\Request;
 
 class PeminjamanController extends Controller
@@ -15,6 +16,7 @@ class PeminjamanController extends Controller
     public function index()
     {
         //
+
         $peminjaman = Peminjaman::all();
         return view('peminjaman.index', compact('peminjaman'));
     }
@@ -27,7 +29,8 @@ class PeminjamanController extends Controller
     public function create()
     {
         //
-        return view('peminjaman.create');
+        $stok = Stok::all();
+        return view('peminjaman.create', compact('stok'));
     }
 
     /**
@@ -38,29 +41,32 @@ class PeminjamanController extends Controller
      */
     public function store(Request $request)
     {
-
-        $request->validate([
-            'peminjaman' => 'required',
+        //
+         $request->validate([
+            'peminjam' => 'required',
             'jk' => 'required',
             'no_tlp' => 'required',
             'jumlah' => 'required',
-            'Merek' => 'required',
             'id_barang' => 'required',
+            'Merek' => 'required',
             'tgl_pinjam' => 'required',
             'tgl_kembali' => 'required',
         ]);
+
         $peminjaman = new Peminjaman;
-        $peminjaman->peminjaman = $request->peminjaman;
+        $peminjaman->peminjam = $request->peminjam;
         $peminjaman->jk = $request->jk;
         $peminjaman->no_tlp = $request->no_tlp;
         $peminjaman->jumlah = $request->jumlah;
-        $peminjaman->merek = $request->merek;
         $peminjaman->id_barang = $request->id_barang;
+        $peminjaman->Merek = $request->Merek;
         $peminjaman->tgl_pinjam = $request->tgl_pinjam;
         $peminjaman->tgl_kembali = $request->tgl_kembali;
         $peminjaman->save();
+        $stok = Stok::findOrFail($request->id_barang);
+        $stok->jumblahstok -= $request->jumlah;
+        $stok->save();
         return redirect()->route('peminjaman.index');
-
     }
 
     /**
@@ -72,7 +78,7 @@ class PeminjamanController extends Controller
     public function show($id)
     {
         //
-        $peminjaman = Peminjaman::findOrFail($id);
+         $peminjaman = Peminjaman::findOrFail($id);
         return view('peminjaman.show', compact('peminjaman'));
     }
 
@@ -86,8 +92,8 @@ class PeminjamanController extends Controller
     {
         //
         $peminjaman = Peminjaman::findOrFail($id);
-        return view('peminjaman.edit', compact('peminjaman'));
-
+        $stok = Stok::all();
+        return view('peminjaman.edit', compact('peminjaman', 'stok'));
     }
 
     /**
@@ -97,30 +103,33 @@ class PeminjamanController extends Controller
      * @param  \App\Models\Peminjaman  $peminjaman
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Peminjaman $peminjaman)
+    public function update(Request $request, $id)
     {
         //
         $request->validate([
-            'peminjaman' => 'required',
+            'peminjam' => 'required',
             'jk' => 'required',
             'no_tlp' => 'required',
             'jumlah' => 'required',
-            'Merek' => 'required',
             'id_barang' => 'required',
+            'Merek' => 'required',
             'tgl_pinjam' => 'required',
             'tgl_kembali' => 'required',
         ]);
 
         $peminjaman = Peminjaman::findOrFail($id);
-        $peminjaman->peminjaman = $request->peminjaman;
+        $peminjaman->peminjam = $request->peminjam;
         $peminjaman->jk = $request->jk;
         $peminjaman->no_tlp = $request->no_tlp;
         $peminjaman->jumlah = $request->jumlah;
-        $peminjaman->Merek = $request->Merek;
         $peminjaman->id_barang = $request->id_barang;
+        $peminjaman->Merek = $request->Merek;
         $peminjaman->tgl_pinjam = $request->tgl_pinjam;
         $peminjaman->tgl_kembali = $request->tgl_kembali;
-        $barangkeluar->save();
+        $peminjaman->save();
+        $stok = Stok::findOrFail($request->id_barang);
+        $stok->jumblahstok -= $request->jumlah;
+        $stok->save();
         return redirect()->route('peminjaman.index');
     }
 
@@ -136,6 +145,5 @@ class PeminjamanController extends Controller
         $peminjaman = Peminjaman::findOrFail($id);
         $peminjaman->delete();
         return redirect()->route('peminjaman.index');
-
     }
 }

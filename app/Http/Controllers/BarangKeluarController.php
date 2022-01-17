@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\barangkeluar;
+use App\Models\Barangkeluar;
+use App\Models\Stok;
 use Illuminate\Http\Request;
 
 class BarangkeluarController extends Controller
@@ -27,8 +28,8 @@ class BarangkeluarController extends Controller
     public function create()
     {
         //
-        $barangkeluar = Barangkeluar::all();
-        return view('barangkeluar.create', compact('barangkeluar'));
+        $stok = Stok::all();
+        return view('barangkeluar.create', compact('stok'));
     }
 
     /**
@@ -39,8 +40,8 @@ class BarangkeluarController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $request->validate([
+        
+         $request->validate([
             'id_barang' => 'required',
             'jumlah' => 'required',
             'tgl_keluar' => 'required',
@@ -57,6 +58,9 @@ class BarangkeluarController extends Controller
         $barangkeluar->Merek = $request->Merek;
         $barangkeluar->kondisi = $request->kondisi;
         $barangkeluar->save();
+        $stok = Stok::findOrFail($request->id_barang);
+        $stok->jumblahstok -= $request->jumlah;
+        $stok->save();
         return redirect()->route('barangkeluar.index');
     }
 
@@ -84,7 +88,8 @@ class BarangkeluarController extends Controller
     {
         //
         $barangkeluar = Barangkeluar::findOrFail($id);
-        return view('barangkeluar.edit', compact('barangkeluar'));
+        $stok = Stok::all();
+        return view('barangkeluar.edit', compact('barangkeluar', 'stok'));
     }
 
     /**
@@ -113,6 +118,10 @@ class BarangkeluarController extends Controller
         $barangkeluar->kategori_barang = $request->kategori_barang;
         $barangkeluar->kondisi = $request->kondisi;
         $barangkeluar->save();
+        $stok = Stok::findOrFail($request->id_barang);
+        $stok->jumblahstok -= $request->jumlah;
+        $stok->save();
+
         return redirect()->route('barangkeluar.index');
 
     }

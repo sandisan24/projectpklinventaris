@@ -20,7 +20,7 @@ class CreateBarangKeluarsTable extends Migration
             $table->integer('jumlah');
             $table->date('tgl_keluar');
             $table->string('kategori_barang');
-            $table->string('merek');
+            $table->string('Merek');
             $table->string('kondisi');
             $table->timestamps();
         });

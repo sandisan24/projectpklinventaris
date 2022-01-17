@@ -53,19 +53,17 @@ class ApiStokController extends Controller
     public function store(Request $request)
     {
         //
-        $stok = new ArticleCategory();
+        $stok = new Stok();
         $stok->nama_barang = $request->nama_barang;
         $stok->kategori_barang = $request->kategori_barang;
         $stok->merek = $request->merek;
-        $stok->stokasal = $request->stokasal;
-        $stok->jumblahbarangmasuk = $request->jumblahbarangmasuk;
-        $stok->jumblahbarangkeluar = $request->jumblahbarangkeluar;
-        $stok->peminjaman = $request->peminjaman;
         $stok->jumblahstok = $request->jumblahstok;
         $stok->save();
         return response()->json([
-            
-        ]);
+            'success' => true,
+            'message' => 'data user berhasil dibuat',
+            'data' => $user,
+        ],201);
     }
 
     /**

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class peminjaman extends Model
 {
     use HasFactory;
-    protected $fillable = ['peminjaman', 'jk', 'no_tlp', 'jumlah', 'merek', 'id_barang', 'tgl_pinjam', 'tgl_kembali'];
-    protected $visible = ['peminjaman', 'jk', 'no_tlp', 'jumlah', 'merek', 'id_barang', 'tgl_pinjam', 'tgl_kembali'];
+    protected $fillable = ['peminjam', 'jk', 'no_tlp', 'jumlah', 'Merek', 'id_barang', 'tgl_pinjam', 'tgl_kembali'];
+    protected $visible = ['peminjam', 'jk', 'no_tlp', 'jumlah', 'Merek', 'id_barang', 'tgl_pinjam', 'tgl_kembali'];
     public $timestamps = true;
 
     public function stok()

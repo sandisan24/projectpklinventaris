@@ -4,19 +4,19 @@
 
 @section('content_header')
 
-    <b>INVENTARIS LAB & BENGKEL SMK ASSALAAM</b>
+Dashboard
 
 @stop
 
 @section('content')
 
-    <b>Halaman Barang Masuk</b>
-    <div class="container">
+Halaman Barang Masuk
+ <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <b>Data Barang Masuk</b>
+                        Data Barang Masuk
                         <a href="{{ route('barangmasuk.create') }}" class="btn btn-sm btn-outline-primary"
                             style="float: right">Add
                             Barang Masuk</a>
@@ -26,27 +26,25 @@
                             <table class="table">
                                 <tr>
                                     <th>Nomor</th>
-                                    <th>Nama Barang</th>
+                                    <th>ID Barang</th>
                                     <th>Kategori Barang</th>
                                     <th>Merek</th>
-                                    <th>Jumlah Barang</th>
+                                    <th>Jumblah Barang</th>
                                     <th>Tanggal Masuk</th>
                                     <th>Kondisi</th>
                                     <th>Keterangan</th>
-
                                 </tr>
                                 @php $no=1; @endphp
                                 @foreach ($barangmasuk as $data)
                                     <tr>
                                         <td>{{ $no++ }}</td>
-                                        <td>{{ $data->stok->nama_barang() }}</td>
-                                        <td>{{ $data->nama_barang }}</td>
+                                        <td>{{ $data->stok->nama_barang }}</td>
                                         <td>{{ $data->kategori_barang }}</td>
-                                        <td>{{ $data->merek }}</td>
+                                        <td>{{ $data->Merek }}</td>
                                         <td>{{ $data->jumlah_barang }}</td>
                                         <td>{{ $data->tgl_masuk }}</td>
                                         <td>{{ $data->kondisi }}</td>
-                                        <td>{{ $data->keterangan }}</td>
+                                        <td>{{ $data->keterangan}}</td>
                                         <td>
                                             <form action="{{ route('barangmasuk.destroy', $data->id) }}" method="post">
                                                 @method('delete')

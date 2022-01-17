@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class barangkeluar extends Model
 {
     use HasFactory;
-    protected $fillable = ['id_barang', 'jumlah', 'tgl_keluar', 'kategori_barang', 'merek', 'kondisi'];
-    protected $visible = ['id_barang', 'jumlah', 'tgl_keluar', 'kategori_barang', 'merek', 'kondisi'];
+    protected $fillable = ['id_barang', 'jumlah', 'tgl_keluar', 'kategori_barang', 'Merek', 'kondisi'];
+    protected $visible = ['id_barang', 'jumlah', 'tgl_keluar', 'kategori_barang', 'Merek', 'kondisi'];
     protected $table = 'barang_keluars';
     public $timestamps = true;
     public function stok()

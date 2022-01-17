@@ -15,11 +15,11 @@ class CreatePeminjamenTable extends Migration
     {
         Schema::create('peminjamen', function (Blueprint $table) {
             $table->id();
-            $table->string('peminjaman');
+            $table->string('peminjam');
             $table->string('jk');
             $table->integer('no_tlp');
             $table->string('jumlah');
-            $table->string('merek');
+            $table->string('Merek');
             $table->BigInteger('id_barang')->unsigned();
             $table->foreign('id_barang')->references('id')->on('stoks');
             $table->date('tgl_pinjam');

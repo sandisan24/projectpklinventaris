@@ -1,39 +1,34 @@
 @extends('adminlte::page')
-@section('header')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-12">
-                    <h1 class="m-0"><b>Tambah Data Barang Masuk</b></h1>
-                </div>
-            </div>
-        </div>
-    </div>
-@endsection
+
+@section('title', 'Dashboard')
+
+@section('content_header')
+
+Dashboard
+
+@stop
 
 @section('content')
-    <div class="container">
+<div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header">Edit Barang Masuk</div>
                     <div class="card-body">
-                        <form action="{{ route('barangmasuk.store') }}" method="post">
+                        <form action="{{ route('barangmasuk.update', $barangmasuk->id) }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="form-group">
-                                <label for="">Id Barang</label>
-                                <input type="text" name="id_barang" value="{{ $barangmasuk->id_barang }}"
-                                    class="form-control @error('id_barang') is-invalid @enderror">
-                                @error('id_barang')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                            @method('put')
+                            
                             <div class="form-group">
                                 <label for="">Nama Barang</label>
-                                <input type="text" name="nama_barang" value="{{ $barangmasuk->nama_barang }}"
-                                    class="form-control @error('nama_barang') is-invalid @enderror">
-                                @error('nama_barang')
+                                <select name="id_barang" class="form-control @error('id_barang') is-invalid @enderror">
+                                    @foreach ($stok as $data)
+                                        <option value="{{ $data->id }}"
+                                            {{ $data->id == $barangmasuk->id_barang ? 'selected="selected"' : '' }}>
+                                            {{ $data->nama_barang }}</option>
+                                    @endforeach
+                                </select>
+                                @error('id_barang')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -48,20 +43,20 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> 
                             <div class="form-group">
                                 <label for="">Merek</label>
-                                <input type="text" name="merek" value="{{ $barangmasuk->merek }}"
-                                    class="form-control @error('merek') is-invalid @enderror">
-                                @error('merek')
+                                <input type="text" name="Merek" value="{{ $barangmasuk->Merek }}"
+                                    class="form-control @error('Merek') is-invalid @enderror">
+                                @error('Merek')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="">Jumblah Barang</label>
-                                <input type="text" name="jumlah_barang" value="{{ $barangmasuk->jumlah_barang }}"
+                                <label for="">Jumblah</label>
+                                <input type="number" name="jumlah_barang" value="{{ $barangmasuk->jumlah_barang }}"
                                     class="form-control @error('jumlah_barang') is-invalid @enderror">
                                 @error('jumlah_barang')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Tanggal Masuk</label>
-                                <input type="date" name="tgl_masuk" value="{{ $barangmasuk->tgl_masuk }}"
+                                <input type="Date" name="tgl_masuk" value="{{ $barangmasuk->tgl_masuk }}"
                                     class="form-control @error('tgl_masuk') is-invalid @enderror">
                                 @error('tgl_masuk')
                                     <span class="invalid-feedback" role="alert">
@@ -79,6 +74,7 @@
                                     </span>
                                 @enderror
                             </div>
+                           
                             <div class="form-group">
                                 <label for="">Kondisi</label>
                                 <input type="text" name="kondisi" value="{{ $barangmasuk->kondisi }}"
@@ -99,11 +95,9 @@
                                     </span>
                                 @enderror
                             </div>
-
-
                             <div class="form-group">
-                                <button type="reset" class="btn btn-default">Reset</button>
-                                <button type="submit" class="btn btn-default">Simpan</button>
+                                <button type="reset" class="btn btn-outline-warning">Reset</button>
+                                <button type="submit" class="btn btn-outline-primary">Save</button>
                             </div>
                         </form>
                     </div>
@@ -111,4 +105,12 @@
             </div>
         </div>
     </div>
-@endsection
+    @stop
+
+@section('css')
+
+@stop
+
+@section('js')
+
+@stop
